@@ -1,0 +1,147 @@
+@local=http://localhost:3000
+@tokenAdmin=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTEzMjI0NmU4ZjhlZGUzMzA0ODg4YmEiLCJpc0FkbWluIjp0cnVlLCJpc0J1c2luZXNzIjp0cnVlLCJpYXQiOjE2OTU3NTMxNjB9.nKsWKZR_l5oaJ1i7WIV2wo90GR0nAmBsqMjhQegv_g0
+@tokenBusiness=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTEzMjI0NmU4ZjhlZGUzMzA0ODg4YmMiLCJpc0FkbWluIjpmYWxzZSwiaXNCdXNpbmVzcyI6dHJ1ZSwiaWF0IjoxNjk1NzUzMDY4fQ.CsJK4W7-ZG484SqR4QLJtCRnivVtJ63bQ3yVJTMmY_I
+@tokenRegular=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTEzMjI0NWU4ZjhlZGUzMzA0ODg4YjgiLCJpc0FkbWluIjpmYWxzZSwiaXNCdXNpbmVzcyI6ZmFsc2UsImlhdCI6MTY5NTc1MzM5N30.j9ADyB3Wq6wQh-YgjVsgfqF_V78kqRWPL6rm37DlYds
+
+### Sign-up user // new user
+POST {{local}}/users
+Content-Type: application/json
+
+{
+    "name":{
+        "first": "uri",
+        "last":"bloy"},
+    "email": "ubloy@gmai.com",
+    "phone":"021522213",
+    "password":"1234568",
+    "address":{
+       "country":"israel",
+       "city":"kiryat malachi",
+       "street":"sd. kakal",
+       "houseNumber":"7/11"
+    },
+    "isBusiness":true
+}
+
+### Sign-in user
+POST {{local}}/users/login
+Content-Type: application/json
+
+{
+    "email": "john_doe@gmail.com",
+    "password": "Aa123456&"
+}
+
+### Get all users
+GET {{local}}/users/
+x-auth-token: {{tokenAdmin}}
+
+### Get user by id
+GET {{local}}/users/65132245e8f8ede3304888b8
+Content-Type: application/json
+x-auth-token:{{tokenRegular}}
+
+### Edit user
+PUT  {{local}}/users/65132245e8f8ede3304888b8
+Content-Type: application/json
+x-auth-token: {{tokenRegular}}
+
+{
+    "name":{
+        "first": "uri",
+        "last":"bloy"},
+    "email": "uri@gmail.com",
+    "phone":"021522213",
+    "password":"1234568",
+    "address":{
+       "country":"israel",
+       "city":"kiryat malachi",
+       "street":"sd. kakal",
+       "houseNumber":"7/11"
+    },
+    "isBusiness":true
+}
+
+### change bizStatus
+PATCH {{local}}/users/651322re45e8fh8ede3304888b8
+Content-Type: application/json
+x-auth-token:{{tokenAdmin}}
+
+{
+    "isBusiness":false
+}
+
+### delete user
+DELETE {{local}}/users/651322a4fe1f46c2e87a1bef
+x-auth-token:{{tokenBusiness}}
+
+### get all cards
+GET  {{local}}/cards
+
+### get myCards
+GET {{local}}/cards/my-cards
+x-auth-token:{{tokenAdmin}}
+
+### get card by id
+GET {{local}}/cards/65132246e8f8ede3304888bf
+
+### new card
+POST {{local}}/cards
+Content-Type: application/json
+x-auth-token: {{tokenAdmin}}
+
+{
+    "title":"n",
+    "subtitle":"subtest",
+    "description":"testing",
+    "phone":"021234567",
+    "email": "test2@test.com",
+    "web": "avi@abc.com",
+    "address":{
+       "country":"israel",
+       "city":"kiryat malachi",
+       "street":"sd. kakal",
+       "houseNumber":"7/11"
+    }
+}
+
+### edit card
+PUT {{local}}/cards/651326befe1f46c2e87a1c0a
+Content-Type: application/json
+x-auth-token: {{tokenAdmin}}
+
+{
+   "title":"edit22",
+    "subtitle":"edit22",
+    "description":"testing",
+    "phone":"021234567",
+    "email": "test2@test.com",
+    "web": "avi@abc.com",
+    "address":{
+       "country":"israel",
+       "city":"kiryat malachi",
+       "street":"sd. kakal",
+       "houseNumber":"7/11"
+    }
+}
+
+### add/sub like
+PATCH {{local}}/cards/651326befe1f46c2e87a1c0a
+Content-Type: application/json
+x-auth-token: {{tokenAdmin}}
+
+### delete card
+DELETE {{local}}/cards/651326befe1f46c2e87a1c0a
+x-auth-token:{{tokenAdmin}}
+
+### change bizNumber
+PATCH {{local}}/cards/changeBizNumber/65132246e8f8ede3304888bf
+Content-Type: application/json
+x-auth-token:{{tokenAdmin}}
+
+{
+    "bizNumber":65304888
+}
+
+### public
+GET {{local}}/test.html
